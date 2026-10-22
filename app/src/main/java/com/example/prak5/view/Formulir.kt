@@ -26,3 +26,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.prak5.R
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FormIsian(
+    jenisK:List<String> = listOf("Laki-laki", "Perempuan"),
+    OnSubmitBtnClick : () -> Unit
+) {

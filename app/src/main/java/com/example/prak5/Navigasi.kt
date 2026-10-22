@@ -1,6 +1,9 @@
 package com.example.prak5
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,28 +20,31 @@ enum class Navigasi {
 fun DataApp(
     navController: NavHostController = rememberNavController()
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = Navigasi.FormulirSaya.name
-    ) {
-        composable(route = Navigasi.FormulirSaya.name) {
-            FormIsian(
-                OnSubmitBtnClick = {
-                    navController.navigate(Navigasi.Detail.name)
-                }
-            )
-        }
-        composable(route = Navigasi.Detail.name) {
-            TampilData(
-                onBackBtnClick = {
-                    cancelAndBackToFormulir(navController)
-                }
-            )
+    Scaffold { isiRuang ->
+        NavHost(
+            navController = navController,
+            startDestination = Navigasi.FormulirSaya.name,
+
+            modifier = Modifier.padding(isiRuang)
+        ) {
+            composable(route = Navigasi.FormulirSaya.name) {
+                FormIsian(
+                    OnSubmitBtnClick = {
+                        navController.navigate(Navigasi.Detail.name)
+                    }
+                )
+            }
+            composable(route = Navigasi.Detail.name) {
+                TampilData(
+                    onBackBtnClick = {
+                        cancelAndBackToFormulirSaya(navController)
+                    }
+                )
+            }
         }
     }
 }
-
-private fun cancelAndBackToFormulir(
+private fun cancelAndBackToFormulirSaya(
     navController: NavHostController
 ) {
     navController.popBackStack(Navigasi.FormulirSaya.name, inclusive = false)
